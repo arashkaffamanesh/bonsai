@@ -46,7 +46,7 @@ You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on t
 You should use kubectl port-forward to access the Rancher Server, e.g.:
 
 ```bash
-kkubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 8443:443
+kubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 8443:443
 ```
 
 ## Clean Up

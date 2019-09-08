@@ -2,7 +2,9 @@
 
 ## Who should use this?
 
-Those who love a light weight k3s implementation on multipass VMs on their local machine.
+Those who'd love to have a light weight k3s implementation on multipass VMs on their local machine. For a full-fledged RKE installation on multipass VMs, please refer to:
+
+https://github.com/arashkaffamanesh/multipass-rke-rancher
 
 ## Prerequisites
 
@@ -29,7 +31,7 @@ Clone this repo and run the scripts as follow:
 
 ```bash
 git clone https://github.com/arashkaffamanesh/multipass-k3s-rancher.git
-cd multipass-rke-rancher
+cd multipass-k3s-rancher
 ./1-deploy-multipass-vms.sh
 ./2-deploy-k3s.sh
 ./3-deploy-rancher-on-k3s.sh

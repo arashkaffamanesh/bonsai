@@ -37,7 +37,7 @@ cd multipass-k3s-rancher
 
 ## What you get
 
-You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 10 minutes. Node1 is the master, all other 3 nodes are the workers.
+You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 5 minutes. Node1 is the master, all other 3 nodes are the workers.
 
 ## Access the Rancher Server on k3s
 

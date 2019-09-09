@@ -56,9 +56,7 @@ kubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 4443:443
 ## Clean Up
 
 ```bash
-multipass stop node1 node2 node3 node4
-multipass delete node1 node2 node3 node4
-multipass purge
+./cleanup.sh
 ```
 
 ## Blog post

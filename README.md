@@ -37,16 +37,26 @@ cd multipass-k3s-rancher
 ./3-deploy-rancher-on-k3s.sh
 ```
 
+Or deploy with a single command:
+
+```bash
+./deploy sh
+```
+
 ## What you get
 
-You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 15 minutes. Node1 is the master, all other 3 nodes are the workers.
+You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 10 minutes. Node1 is the master, all other 3 nodes are the workers.
 
 ## Access the Rancher Server on k3s
 
-You should use kubectl port-forward to access the Rancher Server, e.g.:
+A tab in your browser should open and point to:
+
+https://localhost:4443
+
+If something goes wrong, please use kubectl port-forward to access the Rancher Server, e.g.:
 
 ```bash
-kubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 8443:443
+kubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 4443:443
 ```
 
 ## Clean Up

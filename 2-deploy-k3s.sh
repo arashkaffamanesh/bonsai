@@ -25,10 +25,5 @@ KUBECONFIG=k3s.yaml ./kubectl taint node node1 node-role.kubernetes.io/master=ef
 KUBECONFIG=k3s.yaml ./kubectl get nodes
 echo "are the nodes ready?"
 echo "if you face problems, please open an issue on github"
-echo "make sure all pods are running before deploying Rancher Server on k3s"
-echo "run:"
-echo "multipass exec node1 -- bash -c "\"sudo kubectl get all -A\"""
-echo "This may take about few seconds"
-echo "All fine?"
-echo "Now run ./3-deploy-rancher.sh"
+echo ""
 echo "############################################################################"

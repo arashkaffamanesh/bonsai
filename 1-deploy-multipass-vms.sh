@@ -34,3 +34,7 @@ multipass exec ${NODE} -- bash -c 'sudo chown multipass:multipass /etc/hosts'
 multipass exec ${NODE} -- bash -c 'sudo cat /home/multipass/hosts >> /etc/hosts'
 done
 
+echo "We need to write the host entry of the master to /etc/hosts on your local machine"
+echo "Please provide your sudo password:"
+cat hosts | grep node1 | sudo tee -a /etc/hosts
+

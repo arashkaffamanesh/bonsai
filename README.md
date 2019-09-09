@@ -23,23 +23,15 @@ You need to have about 4GB free RAM and 16GB free storage on your local machine,
 ### Install multipass (on MacOS or Linux)
 
 ```bash
-brew cask install multipass
-sudo snap install multipass --beta --classic
+brew cask install multipass (on MacOS)
+sudo snap install multipass --beta --classic (on linux)
 ```
 
-Clone this repo and run the scripts as follow:
+Clone this repo and deploy with a single command:
 
 ```bash
 git clone https://github.com/arashkaffamanesh/multipass-k3s-rancher.git
 cd multipass-k3s-rancher
-./1-deploy-multipass-vms.sh
-./2-deploy-k3s.sh
-./3-deploy-rancher-on-k3s.sh
-```
-
-Or deploy with a single command:
-
-```bash
 ./deploy.sh
 ```
 

@@ -40,7 +40,7 @@ cd multipass-k3s-rancher
 Or deploy with a single command:
 
 ```bash
-./deploy sh
+./deploy.sh
 ```
 
 ## What you get

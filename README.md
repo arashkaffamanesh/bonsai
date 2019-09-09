@@ -45,6 +45,8 @@ A tab in your browser should open and point to:
 
 https://localhost:4443
 
+Yo may need to refresh the browser and accept the self signed certificate.
+
 If something goes wrong, please use kubectl port-forward to access the Rancher Server, e.g.:
 
 ```bash

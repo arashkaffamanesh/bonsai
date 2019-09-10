@@ -30,11 +30,14 @@ echo "##########################################################################
 
 for NODE in ${NODES}; do
 multipass transfer hosts ${NODE}:/home/multipass/
+multipass transfer ~/.ssh/id_rsa.pub ${NODE}:/home/multipass/
+multipass exec ${NODE} -- sudo iptables -P FORWARD ACCEPT
+multipass exec ${NODE} -- bash -c 'sudo cat /home/multipass/id_rsa.pub >> /home/multipass/.ssh/authorized_keys'
 multipass exec ${NODE} -- bash -c 'sudo chown multipass:multipass /etc/hosts'
 multipass exec ${NODE} -- bash -c 'sudo cat /home/multipass/hosts >> /etc/hosts'
 done
 
-echo "We need to write the host entry of the master to /etc/hosts on your local machine"
+echo "We need to write the host entries on your local machine to /etc/hosts"
 echo "Please provide your sudo password:"
-cat hosts | grep node1 | sudo tee -a /etc/hosts
+cat hosts | sudo tee -a /etc/hosts
 

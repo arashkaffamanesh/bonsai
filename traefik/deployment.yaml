@@ -1,0 +1,68 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: traefik-ingress-controller
+  labels:
+    k8s-app: traefik-ingress-controller
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      k8s-app: traefik-ingress-controller
+  template:
+    metadata:
+      labels:
+        k8s-app: traefik-ingress-controller
+        name: traefik-ingress-controller
+    spec:
+      serviceAccountName: traefik-ingress-serviceaccount
+      terminationGracePeriodSeconds: 35
+      volumes:
+        - name: traefik-ui-tls-cert
+          secret:
+            secretName: traefik-ui-tls-cert
+        - name: traefik-ingress-configmap
+          configMap:
+            name: traefik-ingress-configmap
+      containers:
+      - image: traefik
+        name: traefik-ingress-controller
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 200m
+            memory: 384Mi
+          requests:
+            cpu: 25m
+            memory: 128Mi
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /ping
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /ping
+            port: 80
+            scheme: HTTP
+          periodSeconds: 5
+        volumeMounts:
+          - mountPath: "/ssl"
+            name: "traefik-ui-tls-cert"
+          - mountPath: "/config"
+            name: "traefik-ingress-configmap"
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        - name: dashboard
+          containerPort: 8080
+        args:
+        - --logLevel=INFO
+        - --configfile=/config/traefik.toml

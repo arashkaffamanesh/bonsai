@@ -2,7 +2,7 @@
 
 ## Who should use this?
 
-Those who'd love to have a light weight k3s implementation on multipass VMs on their local machine. For a full-fledged RKE installation on multipass VMs, please refer to:
+Those who'd love to have a light weight real multi-node k3s implementation on multipass VMs on their local machine. For a full-fledged RKE installation on multipass VMs, please refer to:
 
 https://github.com/arashkaffamanesh/multipass-rke-rancher
 
@@ -17,6 +17,8 @@ https://multipass.run/
 This setup was tested on MacOS, but should work on Linux or Windows too.
 
 You need to have about 4GB free RAM and 16GB free storage on your local machine, but it should work with less resources.
+
+You need sudo rights on your machine.
 
 ## Installation
 
@@ -37,20 +39,22 @@ cd multipass-k3s-rancher
 
 ## What you get
 
-You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 5 minutes. Node1 is the master, all other 3 nodes are the workers.
+You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 10 minutes. Node1 is the master, all other 3 nodes are the workers.
 
-## Access the Rancher Server on k3s
+## Accessing the Rancher Server on k3s
 
-A tab in your browser should open and point to:
+A tab in your browser should open after the deployment and point to:
 
-https://localhost:4443
+https://node2
 
-Yo may need to refresh the browser and accept the self signed certificate.
+Yo need to accept the self signed certificate, set the admin password and set the server url.
 
 If something goes wrong, please use kubectl port-forward to access the Rancher Server, e.g.:
 
+## Re-Deploy traefik with dashboard
+
 ```bash
-kubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 4443:443
+./4-deploy-traefik-dashboard.sh
 ```
 
 ## Clean Up
@@ -58,6 +62,10 @@ kubectl port-forward rancher-797f8646f6-pxht7 -n cattle-system 4443:443
 ```bash
 ./cleanup.sh
 ```
+
+## Credits
+
+Thanks to the awesome folks at Rancher Labs for making k3s the first choice for a light weight Kubernetes solution.
 
 ## Blog post
 

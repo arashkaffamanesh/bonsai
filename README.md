@@ -2,7 +2,7 @@
 
 ## Who should use this?
 
-Those who'd love to have a light weight real multi-node k3s implementation on multipass VMs on their local machine. For a full-fledged RKE installation on multipass VMs, please refer to:
+Those who'd love to have a lightweight real multi-node k3s implementation on multipass VMs on their local machine. For a full-fledged RKE installation on multipass VMs, please refer to:
 
 https://github.com/arashkaffamanesh/multipass-rke-rancher
 
@@ -53,6 +53,8 @@ If something goes wrong, please use kubectl port-forward to access the Rancher S
 
 ## Re-Deploy traefik with dashboard
 
+If you'd like to redeploy traefik from scratch, you may want to run:
+
 ```bash
 ./4-deploy-traefik-dashboard.sh
 ```
@@ -65,7 +67,9 @@ If something goes wrong, please use kubectl port-forward to access the Rancher S
 
 ## Credits
 
-Thanks to the awesome folks at Rancher Labs for making k3s the first choice for a light weight Kubernetes solution.
+Thanks to the awesome folks at Rancher Labs for making k3s the first choice for a lightweight Kubernetes solution.
+
+And thanks to Mattia Peri for his [great post](https://medium.com/@mattiaperi/kubernetes-cluster-with-k3s-and-multipass-7532361affa3) on medium, which encouraged me to automate everything with this small implementation for k3s on multipass.
 
 ## Blog post
 

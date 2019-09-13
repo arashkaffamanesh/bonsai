@@ -6,7 +6,8 @@ curl -LO https://git.io/get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
 helm init --service-account tiller
-sleep 60
+kubectl rollout status deployment tiller-deploy -n kube-system
+# sleep 60
 #helm install stable/cert-manager --name cert-manager --namespace kube-system --version v0.5.2
 #sleep 60
 #kubectl -n kube-system rollout status deploy/cert-manager

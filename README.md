@@ -32,13 +32,13 @@ You need kubectl in your path, if not, you can download the v1.15.0 version and 
 MacOS users:
 
 ```bash
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/darwin/amd64/kubectl
 ```
 
 Linux users:
 
 ```bash
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/darwin/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
 ```
 
 ```bash
@@ -46,13 +46,18 @@ chmod +x ./kubectl
 mv kubectl /usr/local/bin/
 ```
 
-### Importamt hint for linux users
+### Important hint for linux users
 
 Linux users should adapt the `create-hosts.sh` and adapt the network interface name. You can find the nic name with:
 
 ```bash
 multipass launch --name test
 multipass exec test -- bash -c 'echo `ls /sys/class/net | grep en`'
+```
+
+Delete and purge the test VM:
+
+```bash
 multipass delete test
 multipass purge
 ```

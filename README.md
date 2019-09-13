@@ -8,11 +8,18 @@ https://github.com/arashkaffamanesh/multipass-rke-rancher
 
 ## Prerequisites
 
+### Install multipass (on MacOS or Linux)
+
 You need Multipass running on your local machine, to learn more about Multipass, please visit:
 
 https://github.com/CanonicalLtd/multipass
 
 https://multipass.run/
+
+```bash
+brew cask install multipass (on MacOS)
+sudo snap install multipass --beta --classic (on linux)
+```
 
 This setup was tested on MacOS, but should work on Linux or Windows too.
 
@@ -20,14 +27,44 @@ You need to have about 4GB free RAM and 16GB free storage on your local machine,
 
 You need sudo rights on your machine.
 
-## Installation
+You need kubectl in your path, if not, you can download the v1.15.0 version and put it in your path:
 
-### Install multipass (on MacOS or Linux)
+MacOS users:
 
 ```bash
-brew cask install multipass (on MacOS)
-sudo snap install multipass --beta --classic (on linux)
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
 ```
+
+Linux users:
+
+```bash
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/darwin/amd64/kubectl
+```
+
+```bash
+chmod +x ./kubectl
+mv kubectl /usr/local/bin/
+```
+
+### Importamt hint for linux users
+
+Linux users should adapt the `create-hosts.sh` and adapt the network interface name. You can find the nic name with:
+
+```bash
+multipass launch --name test
+multipass exec test -- bash -c 'echo `ls /sys/class/net | grep en`'
+multipass delete test
+multipass purge
+```
+
+If the above doesn't work somehow, shell into the node and get the nic name:
+
+```bash
+multipass shell test
+ifconfig
+```
+
+## Installation
 
 Clone this repo and deploy with a single command:
 

@@ -21,7 +21,7 @@ echo "Your browser should open in about 5 minutes and point to:"
 echo "https://node2"
 echo "############################################################################"
 # sleep 300
-./kubectl -n cattle-system rollout status deploy/rancher
+kubectl -n cattle-system rollout status deploy/rancher
 sleep 5
 echo ""
 # rancher=`./kubectl get pods -n cattle-system | grep rancher |awk 'NR==1{print $1}'`
@@ -30,7 +30,7 @@ echo "##########################################################################
 echo "Hope you have fun with k3s on multipass"
 echo "If you have any questions and would like to join us on Slack, here you go:"
 echo "https://kubernauts-slack-join.herokuapp.com/"
-# ./kubectl port-forward -n cattle-system $rancher 4443:443
+# kubectl port-forward -n cattle-system $rancher 4443:443
 open https://node2
 # traefik dashboard
 # open https://node3

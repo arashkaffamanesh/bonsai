@@ -86,8 +86,6 @@ https://node2
 
 Yo need to accept the self signed certificate, set the admin password and set the server url.
 
-If something goes wrong, please use kubectl port-forward to access the Rancher Server, e.g.:
-
 ## Re-Deploy traefik with dashboard
 
 If you'd like to redeploy traefik from scratch, you may want to run:

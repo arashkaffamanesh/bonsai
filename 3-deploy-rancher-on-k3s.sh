@@ -23,7 +23,7 @@ echo "https://node2"
 echo "############################################################################"
 # sleep 300
 kubectl -n cattle-system rollout status deploy/rancher
-sleep 5
+# sleep 5
 echo ""
 # rancher=`./kubectl get pods -n cattle-system | grep rancher |awk 'NR==1{print $1}'`
 # open https:/127.0.0.1:4443

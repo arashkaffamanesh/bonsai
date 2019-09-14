@@ -109,7 +109,7 @@ Now you can launch additional multipass rke VMs (rke1..3) and install docker on 
 ./5-deploy-3-multipass-rkes.sh
 ```
 
-After the install is complete, add a new cluster via Rancher GUI, use flannedl as networking, copy the provided command, shell into the 3 rke nodes and fire the command on all nodes. Your new RKE cluster should show up in Rancher GUI after few minutes in running state.
+After the install is complete, add a new cluster via Rancher GUI, use flannel as networking, copy the provided command, shell into the 3 rke nodes and fire the command on all nodes. Your new RKE cluster should show up in Rancher GUI after few minutes in running state.
 
 ## Clean Up
 

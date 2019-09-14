@@ -33,6 +33,7 @@ for NODE in ${NODES}; do
 multipass transfer hosts ${NODE}:/home/multipass/hosts
 multipass transfer rke-hosts ${NODE}:/home/multipass/rke-hosts
 multipass transfer ~/.ssh/id_rsa.pub ${NODE}:/home/multipass/
+multipass transfer extended-cleanup-rancher2.sh ${NODE}:/home/multipass/
 multipass exec ${NODE} -- sudo iptables -P FORWARD ACCEPT
 multipass exec ${NODE} -- bash -c 'sudo cat /home/multipass/id_rsa.pub >> /home/multipass/.ssh/authorized_keys'
 multipass exec ${NODE} -- bash -c 'sudo chown multipass:multipass /etc/hosts'

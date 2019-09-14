@@ -1,8 +1,8 @@
-# Rancher k3s and Rancher Server on Multipass VMs on your local machine
+# Rancher k3s, Rancher Server and RKE cluster on Multipass VMs on your local machine
 
-## Who should use this?
+This repo provides a lightweight multi-node k3s implementation on multipass VMs on your local machine in step 1 and the deplyoment of a full-fledged RKE cluster through Rancher Server running on k3s in step 2.
 
-Those who'd love to have a lightweight real multi-node k3s implementation on multipass VMs on their local machine. For a full-fledged RKE installation on multipass VMs, please refer to:
+For a full-fledged RKE installation with rke tool on multipass VMs, please refer to:
 
 https://github.com/arashkaffamanesh/multipass-rke-rancher
 
@@ -69,7 +69,7 @@ multipass shell test
 ifconfig
 ```
 
-## Installation
+## k3s Deployment (step 1)
 
 Clone this repo and deploy with a single command:
 
@@ -79,7 +79,7 @@ cd multipass-k3s-rancher
 ./deploy.sh
 ```
 
-## What you get
+## What you get in step 1
 
 You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 10 minutes. Node1 is the master, all other 3 nodes are the workers.
 
@@ -89,15 +89,27 @@ A tab in your browser should open after the deployment and point to:
 
 https://node2
 
-Yo need to accept the self signed certificate, set the admin password and set the server url.
+Yo need to accept the self signed certificate, set the admin password and set the server url in Rancher GUI.
 
-## Re-Deploy traefik with dashboard
+Note: we are using a self signed CA for node2 to be able to deploy a new RKE cluster from Rancher Server GUI running on k3s in the next step.
 
-If you'd like to redeploy traefik from scratch, you may want to run:
+## Re-Deploy traefik with dashboard (optional)
+
+If you'd like to redeploy traefik on k3s from scratch, you may want to run:
 
 ```bash
 ./4-deploy-traefik-dashboard.sh
 ```
+
+## RKE Deployment (step 2)
+
+Now you can launch additional multipass rke VMs (rke1..3) and install docker on them with:
+
+```bash
+./5-deploy-3-multipass-rkes.sh
+```
+
+After the install is complete, add a new cluster via Rancher GUI, use flannedl as networking, copy the provided command, shell into the 3 rke nodes and fire the command on all nodes. Your new RKE cluster should show up in Rancher GUI after few minutes in running state.
 
 ## Clean Up
 

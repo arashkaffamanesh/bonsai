@@ -115,7 +115,18 @@ After the install is complete, add a new cluster via Rancher GUI, use flannedl a
 
 ```bash
 ./cleanup.sh
+./cleanup-rkes.sh
 ```
+
+## Gotchas
+
+Running `./cleanup-rkes.sh` throws an error like:
+
+```bash
+Stopping requested instances -[2019-09-14T14:49:51.096] [error] [rke1] process error occurred Crashed
+```
+
+which can be ignored.
 
 ## Credits
 

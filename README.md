@@ -81,7 +81,7 @@ cd multipass-k3s-rancher
 
 ## What you get in step 1
 
-You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 10 minutes. Node1 is the master, all other 3 nodes are the workers.
+You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on top in about 4-5 minutes. Node1 is the master, all other 3 nodes are the workers.
 
 ## Accessing the Rancher Server on k3s
 
@@ -110,6 +110,20 @@ Now you can launch additional multipass rke VMs (rke1..3) and install docker on 
 ```
 
 After the install is complete, add a new cluster via Rancher GUI, use flannel as networking, copy the provided command, shell into the 3 rke nodes and fire the command on all nodes. Your new RKE cluster should show up in Rancher GUI after few minutes in running state.
+
+```bash
+multipass shell rke1
+```
+
+and run something like this:
+
+```bash
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://node2 --token dkwwqh7mtkrml55sqvmtkr5xm6hbt2tx8l8vf95lgltvnd82wncs6z --ca-checksum da5882d7b45acb72325a2ce5e3b196481ce0f851c8e70fb9582f58a16b7d3f6d --etcd --controlplane --worker
+```
+
+Again, you shall repeat the above step on rke2 and rke3 nodes as well.
+
+In Rancher GUI you will see the rke nodes are getting registered and after few minutes the rke cluster state should change from provisioning / updating state to the ready state.
 
 ## Clean Up
 

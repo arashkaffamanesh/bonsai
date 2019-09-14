@@ -12,7 +12,13 @@ kubectl rollout status deployment tiller-deploy -n kube-system
 #sleep 60
 #kubectl -n kube-system rollout status deploy/cert-manager
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
-helm install --name rancher rancher-latest/rancher --namespace cattle-system --set hostname=node2 --set tls=external
+kubectl create ns cattle-system
+kubectl -n cattle-system create secret generic tls-ca --from-file=./ca/rancher/cacerts.pem
+kubectl -n cattle-system create secret tls tls-rancher-ingress --cert=./ca/rancher/cert.pem --key=./ca/rancher/key.pem
+kubectl get secrets -n cattle-system
+# using slef signed private CA certificate
+helm install --name rancher rancher-latest/rancher --namespace cattle-system --set hostname=node2  --set ingress.tls.source=secret --set privateCA=true
+#helm install --name rancher rancher-latest/rancher --namespace cattle-system --set hostname=node2 --set tls=external
 echo "############################################################################"
 echo "This should take about 5 minutes, please wait ... "
 echo "in the meanwhile open a new shell, change to the install dir and run:"

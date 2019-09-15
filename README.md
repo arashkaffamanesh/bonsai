@@ -156,6 +156,43 @@ Again, you'll get this command from Rancher GUI and you shall repeat the above s
 
 In Rancher GUI you will see the rke nodes are getting registered and after few minutes the rke cluster state should change from `Provisioning / Updating` state to the `Active` state.
 
+Grab the kubeconfig file from the GUI and save it as rke.yaml in the install directory and run:
+
+```bash
+export KUBECONFIG=rke.yaml
+kubectl get nodes
+kubectl config get-contexts
+```
+
+You should get something simliar to this:
+
+```
+multipass-k3s-rancher $ kubectl config get-contexts
+CURRENT   NAME       CLUSTER    AUTHINFO     NAMESPACE
+          rke        rke        user-qq2jg
+*         rke-rke1   rke-rke1   user-qq2jg
+          rke-rke2   rke-rke2   user-qq2jg
+          rke-rke3   rke-rke3   user-qq2jg
+```
+
+## Accessing the RKE Cluster withouht Rancher Server
+
+You can access the RKE cluster withouth the Rancher Server running on k3s, try the following by stopping the master node1 and access the RKE cluster through the rke-rke1 context:
+
+```bash
+multipass stop node1
+kubectl --context rke-rke1 get nodes --kubeconfig=rke.yaml
+```
+
+After stopping node1, which is the k3s master / control plane, you'll see that you can't access the Rancher GUI on k3s and the context rke!
+
+Note: start node1 again to enjoy Rancher running on k3s again:
+
+```bash
+multipass start node1
+open https://node2
+```
+
 ## Performance tip
 
 If you'd need to increase the number of vCPUs, RAM and storage, you can adapt the `1-deploy-multipass-vms.sh` script and set e.g.:

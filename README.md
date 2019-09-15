@@ -156,6 +156,18 @@ Again, you'll get this command from Rancher GUI and you shall repeat the above s
 
 In Rancher GUI you will see the rke nodes are getting registered and after few minutes the rke cluster state should change from `Provisioning / Updating` state to the `Active` state.
 
+## Add-Ons
+
+### OpenEBS
+
+If you'd like to have OpenEBS on your RKE cluster, run:
+
+```bash
+./6-deploy-openebs.sh
+```
+
+and enjoy the power of CNS (Cloud Native Storage), not only on your local machine!
+
 ## Clean Up
 
 ```bash

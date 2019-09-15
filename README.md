@@ -156,6 +156,14 @@ Again, you'll get this command from Rancher GUI and you shall repeat the above s
 
 In Rancher GUI you will see the rke nodes are getting registered and after few minutes the rke cluster state should change from `Provisioning / Updating` state to the `Active` state.
 
+## Performance tip
+
+If you'd need to increase the number of vCPUs, RAM and storage, you can adapt the `1-deploy-multipass-vms.sh` script and set e.g.:
+
+```bash
+--cpus 4 --mem 4G --disk 10G
+```
+
 ## Add-Ons
 
 ### OpenEBS
@@ -175,6 +183,21 @@ and enjoy the power of CNS (Cloud Native Storage), not only on your local machin
 ./cleanup-rkes.sh
 ```
 
+## Troubleshooting
+
+k3s uses containerd as CRI (container runtime interface). If you'd like to see the status of the containers on the nodes for e.g. troubleshooting or fun, you can run:
+
+```bash
+multipass exec node2 -- /bin/bash -c "sudo crictl ps -a"
+```
+
+or shell into the node and run `sudo crictl ps -a`:
+
+```bash
+multipass shell node2
+sudo crictl ps -a
+```
+
 ## Gotchas
 
 Running `./cleanup-rkes.sh` throws an error like:
@@ -191,6 +214,7 @@ Thanks to the awesome folks at Rancher Labs for making k3s the first choice for 
 
 And thanks to Mattia Peri for his [great post](https://medium.com/@mattiaperi/kubernetes-cluster-with-k3s-and-multipass-7532361affa3) on medium, which encouraged me to automate everything with this small implementation for k3s on multipass.
 
+
 ## Blog post
 
 A related blog post will be published on medium soon:
@@ -205,4 +229,8 @@ https://blog.kubernauts.io/
 [Announcing Maesh, a Lightweight and Simpler Service Mesh Made by the Traefik Team](https://blog.containo.us/announcing-maesh-a-lightweight-and-simpler-service-mesh-made-by-the-traefik-team-cb866edc6f29)
 
 [Howto – Set up a highly available instance of Rancher](https://blog.ronnyvdb.net/2019/01/20/howto-set-up-a-highly-available-instance-of-rancher)
+
+[Terraform configs and asnible playbooks to deploy k3s clusters](https://github.com/AnchorFree/ansible-k3s)
+
+
 

@@ -1,10 +1,20 @@
 # Rancher k3s, Rancher Server and RKE cluster on Multipass VMs on your local machine
 
-This repo provides a lightweight multi-node k3s implementation on multipass VMs on your local machine in step 1 and the deplyoment of a full-fledged RKE cluster through Rancher Server running on k3s in step 2.
+## Introduction
+
+This repo provides a lightweight multi-node k3s deployment on multipass VMs on your local machine in step 1 and the deployment of a new full-fledged RKE cluster from Rancher Server running on k3s in step 2.
 
 For a full-fledged RKE installation with rke tool on multipass VMs, please refer to:
 
 https://github.com/arashkaffamanesh/multipass-rke-rancher
+
+## About k3s
+
+[k3s](https://k3s.io/) is a nice tool for development, fun and profit, with k3s you can spin up a lightweight k8s cluster from scratch in less than 3 minutes.
+
+k3s is packed into a single binary, which already includes all you need to quickly spin up a k8s cluster.
+
+To learn more about k3s, please visit [the k3s github repo](https://github.com/rancher/k3s) and [the official documentation.](https://rancher.com/docs/k3s/latest/en/)
 
 ## Prerequisites
 
@@ -71,13 +81,28 @@ ifconfig
 
 ## k3s Deployment (step 1)
 
-Clone this repo and deploy with a single command:
+Clone this repo and deploy a 4-node deployment with a single command:
 
 ```bash
 git clone https://github.com/arashkaffamanesh/multipass-k3s-rancher.git
 cd multipass-k3s-rancher
 ./deploy.sh
 ```
+
+Note: if you want to have only k3s installed, run only:
+
+```bash
+./1-deploy-multipass-vms.sh
+./2-deploy-k3s.sh
+```
+
+Or run:
+
+```bash
+./8-deploy-only-k3s.sh
+```
+
+to enjoy the output of the total runtime :-)
 
 ## What you get in step 1
 
@@ -154,4 +179,10 @@ Blog post will be published on medium:
 
 https://blog.kubernauts.io/
 
+
+## Related resources
+
+[Announcing Maesh, a Lightweight and Simpler Service Mesh Made by the Traefik Team](https://blog.containo.us/announcing-maesh-a-lightweight-and-simpler-service-mesh-made-by-the-traefik-team-cb866edc6f29)
+
+[Howto – Set up a highly available instance of Rancher](https://blog.ronnyvdb.net/2019/01/20/howto-set-up-a-highly-available-instance-of-rancher)
 

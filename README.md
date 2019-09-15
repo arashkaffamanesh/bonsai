@@ -175,7 +175,7 @@ CURRENT   NAME       CLUSTER    AUTHINFO     NAMESPACE
           rke-rke3   rke-rke3   user-qq2jg
 ```
 
-## Accessing the RKE Cluster withouht Rancher Server
+## Accessing the RKE Cluster without Rancher Server
 
 You can access the RKE cluster withouth the Rancher Server running on k3s, try the following by stopping the master node1 and access the RKE cluster through the rke-rke1 context:
 

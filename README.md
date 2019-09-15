@@ -160,7 +160,7 @@ In Rancher GUI you will see the rke nodes are getting registered and after few m
 
 ### OpenEBS
 
-If you'd like to have OpenEBS on your RKE cluster, run:
+If you'd like to have OpenEBS on your RKE cluster on your local machine, run:
 
 ```bash
 ./6-deploy-openebs.sh
@@ -193,12 +193,14 @@ And thanks to Mattia Peri for his [great post](https://medium.com/@mattiaperi/ku
 
 ## Blog post
 
-Blog post will be published on medium:
+A related blog post will be published on medium soon:
 
 https://blog.kubernauts.io/
 
 
 ## Related resources
+
+[The Enterprise Grade Rancher Deployment Guide, the hard way](https://blog.kubernauts.io/enterprise-grade-rancher-deployment-guide-ubuntu-fd261e00994c)
 
 [Announcing Maesh, a Lightweight and Simpler Service Mesh Made by the Traefik Team](https://blog.containo.us/announcing-maesh-a-lightweight-and-simpler-service-mesh-made-by-the-traefik-team-cb866edc6f29)
 

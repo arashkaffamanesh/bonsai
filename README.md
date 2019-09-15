@@ -173,7 +173,6 @@ If you'd like to have OpenEBS on your RKE cluster on your local machine, run:
 ```bash
 ./6-deploy-openebs.sh
 ```
-
 and enjoy the power of CNS (Cloud Native Storage), not only on your local machine!
 
 ## Clean Up

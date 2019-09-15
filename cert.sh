@@ -86,7 +86,7 @@ echo "##########"
 echo "SIGN certificate"
 echo "##########"
 openssl ca -config intermediate/openssl.cnf \
-      -extensions server_cert -days 375 -notext -md sha256 \
+      -extensions server_cert -days 3650 -notext -md sha256 \
       -in intermediate/csr/node2.csr.pem \
       -out intermediate/certs/node2.cert.pem
 chmod 444 intermediate/certs/node2.cert.pem

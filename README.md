@@ -102,7 +102,11 @@ Or run:
 ./8-deploy-only-k3s.sh
 ```
 
-to enjoy the output of the total runtime :-)
+to enjoy the output of the total runtime:
+
+############################################################################
+Total runtime in minutes: 02:47
+############################################################################
 
 ## What you get in step 1
 

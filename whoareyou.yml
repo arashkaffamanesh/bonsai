@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: whoareyou-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: whoareyou
+  template:
+    metadata:
+      labels:
+        app: whoareyou
+    spec:
+      containers:
+      - name: whoareyou-container
+        image: containous/whoami
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoareyou-service
+spec:
+  ports:
+  - name: http
+    targetPort: 80
+    port: 80
+  selector:
+    app: whoareyou
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: whoareyou-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: node4 
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: whoareyou-service
+          servicePort: http

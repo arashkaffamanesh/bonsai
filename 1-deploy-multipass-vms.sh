@@ -3,7 +3,7 @@
 NODES=$(echo node{1..4})
 
 # Create containers
-for NODE in ${NODES}; do multipass launch --name ${NODE} --cpus 2 --mem 2G --disk 4G; done
+for NODE in ${NODES}; do multipass launch --name ${NODE} --cpus 2 --mem 4G --disk 10G; done
 
 # Wait a few seconds for nodes to be up
 sleep 5
@@ -17,6 +17,7 @@ sleep 5
 #for NODE in ${NODES}; do
 #	multipass exec ${NODE} -- bash -c 'echo -n "$(hostname) " ; ip -4 addr show enp0s2 | grep -oP "(?<=inet ).*(?=/)"'
 	# multipass exec ${NODE} -- bash -c 'ip -4 addr show enp0s2 | grep -oP "(?<=inet ).*(?=/)";echo -n "$(hostname) "'
+	# IPADDR=ip a show enp0s2 | grep "inet " | awk '{print $2}' | cut -d / -f1
 #done
 
 # Create the hosts file

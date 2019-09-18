@@ -268,5 +268,10 @@ https://blog.kubernauts.io/
 
 [Terraform configs and asnible playbooks to deploy k3s clusters](https://github.com/AnchorFree/ansible-k3s)
 
+[OpenEBS](https://openebs.io)
 
+[Cloud-Native stateful storage for Kubernetes with Rancher Labs' Longhorn](https://www.civo.com/learn/cloud-native-stateful-storage-for-kubernetes-with-rancher-labs-longhorn)
 
+[Running k3s with metallb on Vagrant](https://medium.com/@toja/running-k3s-with-metallb-on-vagrant-bd9603a5113b)
+
+[vagrant-k3s-metallb](https://github.com/otsuarez/vagrant-k3s-metallb)

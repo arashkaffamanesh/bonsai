@@ -1,9 +1,17 @@
 #!/bin/bash
-export KUBECONFIG=rke.yaml
-NODES=$(echo rke{1..3})
+export KUBECONFIG=k3s.yaml
+NODES=$(echo node{2..4})
 
 for NODE in ${NODES}; do
 multipass exec ${NODE} -- bash -c 'sudo systemctl enable iscsid && sudo systemctl start iscsid'
 done
 
 kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.2.0.yaml
+
+kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.2.0.yaml
+kubectl rollout status deployment -n openebs maya-apiserver
+kubectl patch storageclass openebs-jiva-default -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
+# deploy postgres for test
+
+# helm install --name postgres --set persistence.storageClass=openebs-jiva-default stable/postgresql

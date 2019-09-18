@@ -7,6 +7,7 @@ kubectl delete service -n kube-system traefik
 kubectl delete job -n kube-system helm-install-traefik
 kubectl create ns traefik
 kubectl apply -f ./traefik/ -n traefik
-sleep 90
+kubectl -n traefik rollout status deployment traefik-ingress-controller
+#sleep 90
 open https://node3
 # username / password : admin / admin

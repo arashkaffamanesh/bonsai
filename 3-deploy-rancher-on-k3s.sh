@@ -17,8 +17,8 @@ kubectl -n cattle-system create secret generic tls-ca --from-file=./ca/rancher/c
 kubectl -n cattle-system create secret tls tls-rancher-ingress --cert=./ca/rancher/cert.pem --key=./ca/rancher/key.pem
 kubectl get secrets -n cattle-system
 # using slef signed private CA certificate
-helm install --name rancher rancher-latest/rancher --namespace cattle-system --set hostname=node2  --set ingress.tls.source=secret --set privateCA=true
-#helm install --name rancher rancher-latest/rancher --namespace cattle-system --set hostname=node2 --set tls=external
+helm install --name rancher rancher-stable/rancher --namespace cattle-system --set hostname=node2  --set ingress.tls.source=secret --set privateCA=true
+# helm install --name rancher rancher-stable/rancher --namespace cattle-system --set hostname=node2 --set tls=external
 echo "############################################################################"
 echo "This should take about 2 minutes, please wait ... "
 echo "in the meanwhile open a new shell, change to the install dir and run:"

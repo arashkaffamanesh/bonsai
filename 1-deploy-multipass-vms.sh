@@ -30,15 +30,19 @@ echo "Now deploying k3s on multipass VMs"
 echo "############################################################################"
 
 for NODE in ${NODES}; do
-multipass transfer hosts ${NODE}:/home/multipass/
-multipass transfer ~/.ssh/id_rsa.pub ${NODE}:/home/multipass/
+multipass transfer hosts ${NODE}:
+multipass transfer ~/.ssh/id_rsa.pub ${NODE}:
 multipass exec ${NODE} -- sudo iptables -P FORWARD ACCEPT
-multipass exec ${NODE} -- bash -c 'sudo cat /home/multipass/id_rsa.pub >> /home/multipass/.ssh/authorized_keys'
-multipass exec ${NODE} -- bash -c 'sudo chown multipass:multipass /etc/hosts'
-multipass exec ${NODE} -- bash -c 'sudo cat /home/multipass/hosts >> /etc/hosts'
+multipass exec ${NODE} -- bash -c 'sudo cat /home/ubuntu/id_rsa.pub >> /home/ubuntu/.ssh/authorized_keys'
+multipass exec ${NODE} -- bash -c 'sudo chown ubuntu:ubuntu /etc/hosts'
+multipass exec ${NODE} -- bash -c 'sudo cat /home/ubuntu/hosts >> /etc/hosts'
 done
 
 echo "We need to write the host entries on your local machine to /etc/hosts"
 echo "Please provide your sudo password:"
-cat hosts | sudo tee -a /etc/hosts
+cp /etc/hosts etchosts
+cat hosts | sudo tee -a etchosts
+# workaround to get rid of characters appear as ^M in the hosts file (OSX Catalina)
+tr '\r' '\n' < etchosts > etchosts.unix
+cp etchosts.unix /etc/hosts
 

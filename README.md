@@ -132,6 +132,17 @@ If you'd like to redeploy traefik on k3s from scratch, you may want to run:
 ./4-deploy-traefik-dashboard.sh
 ```
 
+## Deploy Metal-LB for Load Balancing
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+kubectl create -f metal-lb-layer2-config.yaml
+kubectl apply -f nginx.yaml
+kubectl get svc
+```
+
+With that you have exposed nginx with the type LoadBalancer with an External-IP on your local machine!
+
 ## RKE Deployment (step 2)
 
 Now you can launch additional multipass rke VMs (rke1..3) and install docker on them with:
@@ -275,3 +286,9 @@ https://blog.kubernauts.io/
 [Running k3s with metallb on Vagrant](https://medium.com/@toja/running-k3s-with-metallb-on-vagrant-bd9603a5113b)
 
 [vagrant-k3s-metallb](https://github.com/otsuarez/vagrant-k3s-metallb)
+
+[Kubernetes & Traefik 101 When Simplicity Matters](https://medium.com/@geraldcroes/kubernetes-traefik-101-when-simplicity-matters-957eeede2cf8)
+
+[k3s + Gitlab](https://github.com/apk8s/k3s-gitlab)
+
+[Using a k3s Kubernetes Cluster for Your GitLab Project](https://medium.com/better-programming/using-a-k3s-kubernetes-cluster-for-your-gitlab-project-b0b035c291a9)

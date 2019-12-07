@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: service-test-client2
+spec:
+  restartPolicy: Never
+  containers:
+  - name: test-client2
+    image: alpine
+    command: ["/bin/sh"]
+    args: ["-c", "echo 'GET / HTTP/1.1\r\n\r\n' | nc service-test 80"]

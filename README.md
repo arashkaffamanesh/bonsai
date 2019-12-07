@@ -141,7 +141,13 @@ kubectl apply -f nginx.yaml
 kubectl get svc
 ```
 
-With that you have exposed nginx with the type LoadBalancer with an External-IP on your local machine!
+With that you have exposed nginx with the type LoadBalancer with an External-IP on your local machine! In my case the LoadBalancer External-IP was 192.168.64.24, which means you can access nginx with:
+
+http://192.168.64.24 # with load balancing
+
+or through ingress on any worker node:
+
+https://node3 # direct access through traefik
 
 ## RKE Deployment (step 2)
 
@@ -292,3 +298,5 @@ https://blog.kubernauts.io/
 [k3s + Gitlab](https://github.com/apk8s/k3s-gitlab)
 
 [Using a k3s Kubernetes Cluster for Your GitLab Project](https://medium.com/better-programming/using-a-k3s-kubernetes-cluster-for-your-gitlab-project-b0b035c291a9)
+
+[KIND and Load Balancing with MetalLB on Mac](https://www.thehumblelab.com/kind-and-metallb-on-mac/)

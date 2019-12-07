@@ -27,7 +27,9 @@ https://github.com/CanonicalLtd/multipass
 https://multipass.run/
 
 ```bash
-brew cask install multipass (on MacOS)
+brew cask install multipass (on MacOS <= Mojave)
+# for MacOS Catalina (do it on your own risk!)
+sudo installer -target / -verbose -pkg  multipass-0.9.0+mac-Darwin.pkg
 sudo snap install multipass --beta --classic (on linux)
 ```
 

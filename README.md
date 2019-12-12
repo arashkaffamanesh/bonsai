@@ -1,5 +1,7 @@
 # Rancher k3s, Rancher Server and RKE cluster on Multipass VMs on your local machine
 
+![multipass-k3s.png](multipass-k3s.png)
+
 ## Introduction
 
 This repo provides a lightweight multi-node k3s deployment on multipass VMs on your local machine in step 1 and the deployment of a new full-fledged RKE cluster from Rancher Server running on k3s in step 2.
@@ -302,3 +304,5 @@ https://blog.kubernauts.io/
 [Using a k3s Kubernetes Cluster for Your GitLab Project](https://medium.com/better-programming/using-a-k3s-kubernetes-cluster-for-your-gitlab-project-b0b035c291a9)
 
 [KIND and Load Balancing with MetalLB on Mac](https://www.thehumblelab.com/kind-and-metallb-on-mac/)
+
+[Using MetalLB And Traefik Load Balancing For Your Bare Metal Kubernetes Cluster – Part 1](https://www.devtech101.com/2019/02/23/using-metallb-and-traefik-load-balancing-for-your-bare-metal-kubernetes-cluster-part-1/)

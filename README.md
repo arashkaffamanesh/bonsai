@@ -274,9 +274,9 @@ And thanks to Mattia Peri for his [great post](https://medium.com/@mattiaperi/ku
 
 ## Blog post
 
-A related blog post will be published on medium soon:
+A related blog post will is published here:
 
-https://blog.kubernauts.io/
+https://blog.kubernauts.io/k3s-with-metallb-on-multipass-vms-ac2b37298589?
 
 
 ## Related resources

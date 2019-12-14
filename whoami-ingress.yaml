@@ -4,6 +4,7 @@ metadata:
   name: whoami-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
 spec:
   rules:
   - host: node3

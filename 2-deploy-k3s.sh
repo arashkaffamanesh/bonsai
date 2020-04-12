@@ -16,12 +16,12 @@ echo "##########################################################################
 # multipass exec node1 -- bash -c "sudo kubectl get nodes"
 multipass exec node1 -- bash -c 'sudo cat /etc/rancher/k3s/k3s.yaml' > k3s.yaml
 sed -i'.back' -e 's/127.0.0.1/node1/g' k3s.yaml
-export KUBECONFIG=k3s.yaml
-kubectl taint node node1 node-role.kubernetes.io/master=effect:NoSchedule
-kubectl label node node2 node-role.kubernetes.io/node=
-kubectl label node node3 node-role.kubernetes.io/node=
-kubectl label node node4 node-role.kubernetes.io/node=
-kubectl get nodes
+# export KUBECONFIG=k3s.yaml
+KUBECONFIG=k3s.yaml kubectl taint node node1 node-role.kubernetes.io/master=effect:NoSchedule
+KUBECONFIG=k3s.yaml kubectl label node node2 node-role.kubernetes.io/node=
+KUBECONFIG=k3s.yaml kubectl label node node3 node-role.kubernetes.io/node=
+KUBECONFIG=k3s.yaml kubectl label node node4 node-role.kubernetes.io/node=
+KUBECONFIG=k3s.yaml kubectl get nodes
 echo "are the nodes ready?"
 echo "if you face problems, please open an issue on github"
 echo ""

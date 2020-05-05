@@ -28,31 +28,24 @@ https://github.com/CanonicalLtd/multipass
 
 https://multipass.run/
 
-```bash
-brew cask install multipass (on MacOS <= Mojave)
-# for MacOS Catalina (do it on your own risk!)
-sudo installer -target / -verbose -pkg  multipass-0.9.0+mac-Darwin.pkg
-sudo snap install multipass --beta --classic (on linux)
-```
-
 This setup was tested on MacOS, but should work on Linux or Windows too.
 
 You need to have about 4GB free RAM and 16GB free storage on your local machine, but it should work with less resources.
 
 You need sudo rights on your machine.
 
-You need kubectl in your path, if not, you can download the v1.15.0 version and put it in your path:
+You need kubectl in your path, if not, you can download the v1.17.4 version and put it in your path:
 
 MacOS users:
 
 ```bash
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/darwin/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.4/bin/darwin/amd64/kubectl
 ```
 
 Linux users:
 
 ```bash
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.4/bin/linux/amd64/kubectl
 ```
 
 ```bash

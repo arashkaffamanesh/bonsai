@@ -90,7 +90,7 @@ Clone this repo and deploy a 4-node deployment with a single command:
 ```bash
 git clone https://github.com/arashkaffamanesh/multipass-k3s-rancher.git
 cd multipass-k3s-rancher
-./deploy.sh
+./deploy-bonsai.sh
 ```
 
 Note: if you want to have only k3s installed, run only:

@@ -22,7 +22,7 @@ KUBECONFIG=k3s.yaml kubectl label node node2 node-role.kubernetes.io/node=
 KUBECONFIG=k3s.yaml kubectl label node node3 node-role.kubernetes.io/node=
 KUBECONFIG=k3s.yaml kubectl label node node4 node-role.kubernetes.io/node=
 # sleep 10
-KUBECONFIG=k3s.yaml kubectl kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
+KUBECONFIG=k3s.yaml kubectl create -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
 KUBECONFIG=k3s.yaml kubectl create -f metal-lb-layer2-config.yaml
 KUBECONFIG=k3s.yaml kubectl rollout status -n metallb-system daemonset speaker
 KUBECONFIG=k3s.yaml kubectl get all -A

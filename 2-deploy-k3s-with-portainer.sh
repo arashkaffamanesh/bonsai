@@ -16,22 +16,22 @@ echo "##########################################################################
 # multipass exec node1 -- bash -c "sudo kubectl get nodes"
 multipass exec node1 -- bash -c 'sudo cat /etc/rancher/k3s/k3s.yaml' > k3s.yaml
 sed -i'.back' -e 's/127.0.0.1/node1/g' k3s.yaml
-# export KUBECONFIG=k3s.yaml
-KUBECONFIG=k3s.yaml kubectl taint node node1 node-role.kubernetes.io/master=effect:NoSchedule
-KUBECONFIG=k3s.yaml kubectl label node node2 node-role.kubernetes.io/node=
-KUBECONFIG=k3s.yaml kubectl label node node3 node-role.kubernetes.io/node=
-KUBECONFIG=k3s.yaml kubectl label node node4 node-role.kubernetes.io/node=
+export KUBECONFIG=`pwd`/k3s.yaml
+kubectl taint node node1 node-role.kubernetes.io/master=effect:NoSchedule
+kubectl label node node2 node-role.kubernetes.io/node=
+kubectl label node node3 node-role.kubernetes.io/node=
+kubectl label node node4 node-role.kubernetes.io/node=
 # sleep 10
-KUBECONFIG=k3s.yaml kubectl create -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
-KUBECONFIG=k3s.yaml kubectl create -f metal-lb-layer2-config.yaml
-KUBECONFIG=k3s.yaml kubectl rollout status -n metallb-system daemonset speaker
-KUBECONFIG=k3s.yaml kubectl get all -A
-KUBECONFIG=k3s.yaml kubectl get nodes
+kubectl create -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
+kubectl create -f metal-lb-layer2-config.yaml
+kubectl rollout status -n metallb-system daemonset speaker
+kubectl get all -A
+kubectl get nodes
 echo "are the nodes ready?"
 echo "if you face problems, please open an issue on github"
 echo "now deploying portainer"
-KUBECONFIG=k3s.yaml kubectl create -f addons/portainer/portainer.yaml
-KUBECONFIG=k3s.yaml kubectl rollout status -n portainer deployment portainer
-KUBECONFIG=k3s.yaml portainer_ip=`kubectl get svc -n portainer | grep portainer | awk 'NR==1{print $4}'`
+kubectl create -f addons/portainer/portainer.yaml
+kubectl rollout status -n portainer deployment portainer
+portainer_ip=`kubectl get svc -n portainer | grep portainer | awk 'NR==1{print $4}'`
 open http://$portainer_ip:9000
 echo "############################################################################"

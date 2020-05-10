@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kind-cluster
+spec:
+  containers:
+  - image: jieyu/kind-cluster-buster:v0.1.0
+    imagePullPolicy: Always
+    name: kind-cluster
+    stdin: true
+    tty: true
+    args:
+    - /bin/bash
+    env:
+    - name: API_SERVER_ADDRESS
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    volumeMounts:
+    - mountPath: /var/lib/docker
+      name: varlibdocker
+    - mountPath: /lib/modules
+      name: libmodules
+      readOnly: true
+    securityContext:
+      privileged: true
+    ports:
+    - containerPort: 30001
+      name: api-server-port
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 15
+      httpGet:
+        path: /healthz
+        port: api-server-port
+        scheme: HTTPS
+      initialDelaySeconds: 120
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 1
+  volumes:
+  - name: varlibdocker
+    emptyDir: {}
+  - name: libmodules
+    hostPath:
+      path: /lib/modules

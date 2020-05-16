@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      volumes:
+      - name: local-hostpath-pvc
+        persistentVolumeClaim:
+          claimName: local-hostpath-pvc
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: local-hostpath-pvc
+          mountPath: /usr/share/nginx/html

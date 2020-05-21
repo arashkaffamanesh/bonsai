@@ -1,4 +1,4 @@
-# Rancher k3s, Rancher Server and RKE cluster on Multipass VMs on your local machine
+# Bonsai: Rancher k3s, Rancher Server, Portainer and RKE cluster on Multipass VMs on your local machine, with MetalLB, HashiCorp Vault, Tekton Pipelines, OpenEBS and more as addons
 
 ![multipass-k3s.png](multipass-k3s.png)
 

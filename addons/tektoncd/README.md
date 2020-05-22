@@ -1,4 +1,4 @@
-# Tekton Pipelines on Bonsai
+# Tekton Pipelines on K3s Bonsai
 
 ```bash
 kubectl apply -f tekton-plus-dashboard-lb-service.yaml

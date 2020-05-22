@@ -1,8 +1,10 @@
-# BonsaiKube: Rancher k3s, Rancher Server, Portainer and RKE cluster on Multipass VMs on your local machine, with MetalLB, HashiCorp Vault, Tekton Pipelines, OpenEBS and more as addons
+# Bonsai Kube: Rancher k3s, Rancher Server, Portainer and RKE cluster on Multipass VMs on your local machine, with MetalLB, HashiCorp Vault, Tekton Pipelines, OpenEBS and more as addons
 
 ![multipass-k3s.png](multipass-k3s.png)
 
 ## Introduction
+
+![bonsai](bonsai.jpg)
 
 This repo provides a lightweight multi-node k3s deployment on multipass VMs on your local machine in step 1 and the deployment of a new full-fledged RKE cluster from Rancher Server running on k3s in step 2.
 

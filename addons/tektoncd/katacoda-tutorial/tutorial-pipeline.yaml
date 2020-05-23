@@ -1,0 +1,30 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: tutorial-pipeline
+spec:
+  resources:
+    - name: source
+      type: git
+    - name: image
+      type: image
+  tasks:
+    - name: build-and-push-to-dockerhub
+      taskRef:
+        name: build-and-push-docker-image-from-git
+      resources:
+        inputs:
+          - name: source
+            resource: source
+        outputs:
+          - name: image
+            resource: image
+    - name: deploy-app
+      taskRef:
+        name: deploy-using-kubectl
+      resources:
+        inputs:
+          - name: image
+            resource: image
+            from:
+              - build-and-push-to-dockerhub

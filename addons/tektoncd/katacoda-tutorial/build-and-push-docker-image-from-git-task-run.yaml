@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: build-and-push-docker-image-from-git-task-run
+spec:
+  serviceAccountName: tutorial-service
+  taskRef:
+    name: build-and-push-docker-image-from-git
+  resources:
+    inputs:
+      - name: source
+        resourceRef:
+          name: hello-world-git
+    outputs:
+      - name: image
+        resourceRef:
+          name: hello-world-image

@@ -12,7 +12,13 @@ open http://$dashboard_ip:9097
 
 https://github.com/tektoncd/pipeline
 
-https://github.com/tektoncd/pipeline/blob/master/docs/tutorial.md
+## Tutorial
+
+Please refer to [README](katacoda-tutorial/README.md) under katacoda-tutorial
+
+(this didn't work)
+
+https://github.com/tektoncd/pipeline/blob/master/docs/tutorial.md 
 
 ## Open-Toolchain Tekton Catalog
 

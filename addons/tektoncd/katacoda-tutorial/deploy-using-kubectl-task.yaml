@@ -1,0 +1,43 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-using-kubectl
+spec:
+  params:
+    - name: URL
+      type: string
+      description: The location of the infra/yaml that will be applied
+      default: "https://raw.githubusercontent.com/popcor255/Kubernetes-Objects/master/pods/"
+    - name: PATH
+      type: string
+      description: This is the name of the file
+      default: my-pod.yaml
+  resources:
+    inputs:
+      - name: image
+        type: image
+  steps:
+    - name: fetch-yaml
+      image: ellerbrock/alpine-bash-curl-ssl
+      command: ["/bin/bash"]
+      args:
+        - -c
+        - |
+          set -e
+          curl $(params.URL)$(params.PATH) > $(params.PATH)
+    - name: replace-image
+      image: mikefarah/yq
+      command: ["yq"]
+      args:
+        - "w"
+        - "-i"
+        - "$(params.PATH)"
+        - "spec.containers[0].image"
+        - "$(resources.inputs.image.url)"
+    - name: run-kubectl
+      image: lachlanevenson/k8s-kubectl
+      command: ["kubectl"]
+      args:
+        - "apply"
+        - "-f"
+        - "$(params.PATH)"

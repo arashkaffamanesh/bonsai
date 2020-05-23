@@ -1,0 +1,36 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-and-push-docker-image-from-git
+spec:
+  params:
+    - name: BUILDER_IMAGE
+      description: The location of the builder image
+      default: quay.io/buildah/stable:v1.14.3
+  resources:
+    inputs:
+      - name: source
+        type: git
+    outputs:
+      - name: image
+        type: image
+  steps:
+    - name: build-and-push
+      image: $(inputs.params.BUILDER_IMAGE)
+      workingDir: /workspace/source
+      command: ["/bin/bash"]
+      args:
+        - -c
+        - |
+          set -e
+          IMAGE_NAME="$(outputs.resources.image.url)"
+          buildah bud --tls-verify="false" --layers -f "./Dockerfile" -t "$IMAGE_NAME:latest" .
+          buildah push --tls-verify="false" "$IMAGE_NAME:latest" "docker://$IMAGE_NAME:latest"
+      securityContext:
+        privileged: true
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+  volumes:
+    - name: varlibcontainers
+      emptyDir: {}

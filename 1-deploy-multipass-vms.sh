@@ -1,25 +1,13 @@
 #!/bin/bash
-# multipass delete $(echo node{1..4})
-NODES=$(echo node{1..4})
+MASTER=$(echo "k3s-master ") && WORKER=$(echo k3s-worker{1..3})
+NODES+=$MASTER
+NODES+=$WORKER
 
 # Create containers
 for NODE in ${NODES}; do multipass launch --name ${NODE} --cpus 2 --mem 4G --disk 10G; done
-# for NODE in ${NODES}; do multipass launch --name ${NODE} ; done
 
 # Wait a few seconds for nodes to be up
 sleep 5
-
-#echo "############################################################################"
-#echo "multipass containers installed:"
-#multipass ls
-#echo "############################################################################"
-
-# Print nodes ip addresses
-#for NODE in ${NODES}; do
-#	multipass exec ${NODE} -- bash -c 'echo -n "$(hostname) " ; ip -4 addr show enp0s2 | grep -oP "(?<=inet ).*(?=/)"'
-	# multipass exec ${NODE} -- bash -c 'ip -4 addr show enp0s2 | grep -oP "(?<=inet ).*(?=/)";echo -n "$(hostname) "'
-	# IPADDR=ip a show enp0s2 | grep "inet " | awk '{print $2}' | cut -d / -f1
-#done
 
 # Create the hosts file
 ./create-hosts.sh > hosts

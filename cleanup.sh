@@ -1,5 +1,8 @@
 #!/bin/bash
-NODES=$(echo node{1..4})
+MASTER=$(echo $(multipass list | grep master | awk '{print $1}'))
+WORKERS=$(echo $(multipass list | grep worker | awk '{print $1}'))
+NODES+=$MASTER
+NODES=$WORKERS
 
 # Stop then delete nodes
 for NODE in ${NODES}; do multipass stop ${NODE} && multipass delete ${NODE}; done

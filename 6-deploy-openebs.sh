@@ -1,7 +1,7 @@
 #!/bin/bash
-export KUBECONFIG=`pwd`/k3s.yaml && echo '[Info] setting KUBECONFIG='$KUBECONFIG
+export KUBECONFIG=`pwd`/k3s.yaml && echo '[${LB}Info${NC}] setting KUBECONFIG='$KUBECONFIG
 
-WORKERS=$(echo multipass list | grep worker | awk '{print $1}')
+WORKERS=$(echo $(multipass list | grep worker | awk '{print $1}'))
 
 for NODE in ${WORKERS}; do
 multipass exec ${NODE} -- bash -c 'sudo systemctl enable iscsid && sudo systemctl start iscsid'

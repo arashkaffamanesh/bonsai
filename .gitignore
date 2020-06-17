@@ -1,5 +1,8 @@
 etchosts
 etchosts.unix
-hosts
 k3s.yaml
 k3s.yaml.back
+hosts
+hosts.backup
+hosts.cleanup.backup
+addons/.DS_Store

@@ -1,7 +1,7 @@
 #!/bin/bash
 res1=$(date +%s)
 ./1-deploy-multipass-vms.sh
-./2-deploy-k3s-with-portainer.sh
+./2-deploy-k3s.sh
 # ./3-deploy-rancher-on-k3s.sh
 res2=$(date +%s)
 dt=$(echo "$res2 - $res1" | bc)

@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 nodeCount=2
 read -p  "How many worker nodes do you want?(default:2) promt with [ENTER]:" inputNode
@@ -14,6 +14,9 @@ read -p  "How many gigabyte diskspace do you want per node?(default:10) promt wi
 diskCount="${inputDisk:-$diskCount}"
 
 MASTER=$(echo "k3s-master ") && WORKER=$(eval 'echo k3s-worker{1..'"$nodeCount"'}')
+
+MASTER=$(echo "k3s-master ") && WORKER=$(echo k3s-worker{1..2})
+
 NODES+=$MASTER
 NODES+=$WORKER
 

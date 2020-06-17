@@ -1,5 +1,5 @@
 #!/bin/bash
-MASTER=$(echo "k3s-master ") && WORKER=$(echo k3s-worker{1..3})
+MASTER=$(echo "k3s-master ") && WORKER=$(echo k3s-worker{1..2})
 NODES+=$MASTER
 NODES+=$WORKER
 

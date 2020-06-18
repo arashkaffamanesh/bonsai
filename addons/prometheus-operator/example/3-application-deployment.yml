@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox-exporter-deployment
+  labels:
+    app: blackbox-exporter-deployment
+  namespace: application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackbox-exporter-deployment
+  template:
+    metadata:
+      labels:
+        app: blackbox-exporter-deployment
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: prom/blackbox-exporter:master
+        name: blackbox-exporter-pod
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 200m
+            memory: 250Mi
+        volumeMounts:
+        - name: application-pod-config
+          mountPath: /etc/blackbox_exporter/config.yml
+          subPath: config.yml
+      volumes:
+      - name: application-pod-config
+        configMap:
+            name: application-deployment-configmap

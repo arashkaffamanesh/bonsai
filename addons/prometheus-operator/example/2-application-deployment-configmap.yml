@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-deployment-configmap
+  namespace: application
+data:
+  config.yml: | # here is the blackbox config. it will be injected on pod startup
+    modules:
+      http_2xx:
+        prober: http
+      http_401:
+        prober: http
+        http:
+          valid_status_codes: [401]

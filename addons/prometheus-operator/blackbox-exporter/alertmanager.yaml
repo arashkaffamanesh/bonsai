@@ -1,0 +1,28 @@
+global:
+  resolve_timeout: 5m
+route:
+  group_by:
+  - job
+  group_interval: 5m
+  group_wait: 30s
+  repeat_interval: 12h
+  receiver: 'kubernauts-slack-webhook'
+  routes:
+  - match:
+      alertname: ExampleAlert
+    receiver: 'kubernauts-slack-webhook'
+receivers:
+- name: 'kubernauts-slack-webhook'
+  slack_configs:
+  - api_url: '<add slack hook here>'
+    channel: '#alerts'
+    title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
+    text: |-
+      {{ range .Alerts }}
+        *Alert:* {{ .Labels.alertname }} - `{{ .Labels.severity }}`
+        *Description:* {{ .Annotations.message }}
+        *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook_url }}|:spiral_note_pad:>
+        *Details:*
+        {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+        {{ end }}
+      {{ end }}

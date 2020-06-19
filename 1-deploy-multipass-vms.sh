@@ -15,8 +15,6 @@ diskCount="${inputDisk:-$diskCount}"
 
 MASTER=$(echo "k3s-master ") && WORKER=$(eval 'echo k3s-worker{1..'"$nodeCount"'}')
 
-MASTER=$(echo "k3s-master ") && WORKER=$(echo k3s-worker{1..2})
-
 NODES+=$MASTER
 NODES+=$WORKER
 

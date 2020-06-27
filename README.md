@@ -80,25 +80,12 @@ ifconfig
 
 ## k3s Deployment (step 1)
 
-Clone this repo and deploy a 4-node deployment with a single command:
+Clone this repo and deploy a 3-node deployment with a single command:
 
 ```bash
 git clone https://github.com/arashkaffamanesh/multipass-k3s-rancher.git
 cd multipass-k3s-rancher
 ./deploy-bonsai.sh
-```
-
-Note: if you want to have only k3s installed, run only:
-
-```bash
-./1-deploy-multipass-vms.sh
-./2-deploy-k3s.sh
-```
-
-Or run:
-
-```bash
-./8-deploy-only-k3s.sh
 ```
 
 to enjoy the output of the total runtime:
@@ -117,7 +104,7 @@ You should get a running k3s cluster on 4 Multipass VMs with Rancher Server on t
 
 A tab in your browser should open after the deployment and point to:
 
-https://node2
+https://k3s-worker1
 
 Yo need to accept the self signed certificate, set the admin password and set the server url in Rancher GUI.
 
@@ -146,7 +133,7 @@ http://192.168.64.24 # with load balancing
 
 or through ingress on any worker node:
 
-https://node3 # direct access through traefik
+https://k3s-worker2 # direct access through traefik
 
 ## RKE Deployment (step 2)
 
@@ -224,9 +211,18 @@ If you'd need to increase the number of vCPUs, RAM and storage, you can adapt th
 If you'd like to have OpenEBS on your RKE cluster on your local machine, run:
 
 ```bash
-./6-deploy-openebs.sh
+./6-deploy-addon-openebs.sh
 ```
 and enjoy the power of CNS (Cloud Native Storage), not only on your local machine!
+
+### Prometheus operator
+
+If you'd like to have Prometheus on your RKE cluster on your local machine, run:
+
+```bash
+./6-deploy-addon-prometheus.sh
+```
+
 
 ## Clean Up
 
@@ -240,13 +236,13 @@ and enjoy the power of CNS (Cloud Native Storage), not only on your local machin
 k3s uses containerd as CRI (container runtime interface). If you'd like to see the status of the containers on the nodes for e.g. troubleshooting or fun, you can run:
 
 ```bash
-multipass exec node2 -- /bin/bash -c "sudo crictl ps -a"
+multipass exec k3s-worker -- /bin/bash -c "sudo crictl ps -a"
 ```
 
 or shell into the node and run `sudo crictl ps -a`:
 
 ```bash
-multipass shell node2
+multipass shell k3s-worker
 sudo crictl ps -a
 ```
 

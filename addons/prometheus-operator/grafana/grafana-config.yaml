@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: promo-grafana
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: promo
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 6.7.1
+    helm.sh/chart: grafana-5.0.12
+data:
+  admin-password: cHJvbS1vcGVyYXRvcg==
+  admin-user: YWRtaW4=
+  ldap-toml: ""

@@ -1,0 +1,43 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: blackbox-exporter
+  labels:
+    prometheus: kube-prometheus # important for autoscraping through the operator
+    release: promo              # important for autoscraping through the operator
+  namespace: application
+spec:
+  jobLabel: website           # is arbitrary
+  namespaceSelector:
+    matchNames:
+    - application             # defines the watched namespace. "all" is also permitted
+  selector:
+    matchLabels:
+      app: blackbox-exporter-service
+  endpoints:
+  - interval: 20s             # blackbox monitor self monitoring because no params
+    port: http-metrics        # related service port
+  - interval: 20s             # scraping intervall
+    params:
+      module:                 # available modules are in the alertmanager.yaml at the alertmanager config
+      - http_2xx
+      target:                 # traget enpoint/s multiple values permitted
+      - https://kubernauts.sh
+    path: "/probe"
+    port: http-metrics        
+    targetPort: 9115          # default blackbox monitor port
+    relabelings:
+    - sourceLabels: [__param_target]
+      targetLabel: instance   # copy the targe value into the instance label
+  - interval: 50s 
+    params:
+      module:
+      - http_401
+      target:
+      - https://api.example.de/about/cacheState/
+    path: "/probe"
+    port: http-metrics
+    targetPort: 9115
+    relabelings:
+    - sourceLabels: [__param_target]
+      targetLabel: instance

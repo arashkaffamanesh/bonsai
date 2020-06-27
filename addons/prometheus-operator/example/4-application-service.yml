@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: blackbox-exporter-service
+  labels:
+    app: blackbox-exporter-service
+  namespace: application
+spec:
+  selector:
+    app: blackbox-exporter-deployment
+  ports:
+  - name: http-metrics
+    port: 9115
+    targetPort: 9115

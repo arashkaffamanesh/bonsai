@@ -15,19 +15,20 @@ cleanupAnsw="${input:-$cleanupAnsw}"
 
 if [ $cleanupAnsw == 'y' ];
 then
-  echo "We need to write the host entries on your local machine to /etc/hosts"
-  echo "Please provide your sudo password:"
-
-  # backup before cleanup
-  cp /etc/hosts hosts.cleanup.backup
-  cp hosts.cleanup.backup hosts
-
   # seach for existing multipass config
   exists=$(grep -n "####### multipass hosts start ##########" hosts | awk -F: '{print $1}' | head -1)
   # check if var is empty
   if test -z "$exists" 
   then
     exists=0
+  else 
+    echo "We need to remove the host entries on your local machine from /etc/hosts"
+    echo "Before modifying /etc/hosts will be backuped at hosts.cleanup.backup"
+    echo "Please provide your sudo password:"
+
+    # backup before cleanup
+    cp /etc/hosts hosts.cleanup.backup
+    cp hosts.cleanup.backup hosts
   fi
 
   # cut existing config
